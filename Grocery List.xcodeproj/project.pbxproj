@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		880D237D22CB357200CAB140 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880D237C22CB357200CAB140 /* AppDelegate.swift */; };
-		880D237F22CB357200CAB140 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880D237E22CB357200CAB140 /* ViewController.swift */; };
 		880D238222CB357200CAB140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 880D238022CB357200CAB140 /* Main.storyboard */; };
 		880D238522CB357200CAB140 /* Grocery_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 880D238322CB357200CAB140 /* Grocery_List.xcdatamodeld */; };
 		880D238722CB357300CAB140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 880D238622CB357300CAB140 /* Assets.xcassets */; };
 		880D238A22CB357300CAB140 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 880D238822CB357300CAB140 /* LaunchScreen.storyboard */; };
+		880D239822CB718000CAB140 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880D239722CB718000CAB140 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		880D237922CB357200CAB140 /* Grocery List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		880D237C22CB357200CAB140 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		880D237E22CB357200CAB140 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		880D238122CB357200CAB140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		880D238422CB357200CAB140 /* Grocery_List.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Grocery_List.xcdatamodel; sourceTree = "<group>"; };
 		880D238622CB357300CAB140 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		880D238922CB357300CAB140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		880D238B22CB357300CAB140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		880D239722CB718000CAB140 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				880D237C22CB357200CAB140 /* AppDelegate.swift */,
-				880D237E22CB357200CAB140 /* ViewController.swift */,
 				880D238022CB357200CAB140 /* Main.storyboard */,
+				880D239722CB718000CAB140 /* TableViewController.swift */,
 				880D238622CB357300CAB140 /* Assets.xcassets */,
 				880D238822CB357300CAB140 /* LaunchScreen.storyboard */,
 				880D238B22CB357300CAB140 /* Info.plist */,
@@ -138,8 +138,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				880D237F22CB357200CAB140 /* ViewController.swift in Sources */,
 				880D237D22CB357200CAB140 /* AppDelegate.swift in Sources */,
+				880D239822CB718000CAB140 /* TableViewController.swift in Sources */,
 				880D238522CB357200CAB140 /* Grocery_List.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
