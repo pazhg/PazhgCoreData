@@ -7,15 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController {
     
-    var items : [String] = []
+    //var items : [String] = []
+    var items : [NSManagedObject] = []
+    
+    var container : NSPersistentContainer!
+    var context : NSManagedObjectContext!
     
     //MARK: - Views
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //Access to AppDelegate to set properties
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        container = appDelegate.persistentContainer
+        context = container.viewContext
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,7 +35,7 @@ class TableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        reloadDataOfTableView()
     }
     
     // MARK: - Table view data source
@@ -44,7 +55,9 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         // Configure the cell...
-        cell.textLabel!.text = items [ indexPath.row ]
+        //cell.textLabel!.text = items [ indexPath.row ]
+        let item = items [ indexPath.row]
+        cell.textLabel!.text =  item.value(forKey: "title") as? String
         return cell
     }
 
@@ -55,15 +68,15 @@ class TableViewController: UITableViewController {
     }
 
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            items.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            items.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
     
 
     /*
@@ -98,8 +111,20 @@ class TableViewController: UITableViewController {
         }
         let actionStore = UIAlertAction.init(title: "Store", style: UIAlertAction.Style.default) { (UIAlertAction) in
             if let text = alert.textFields?.first?.text {
-                self.items.append(text)
-                self.tableView.reloadData()
+                //self.items.append(text)
+                //self.tableView.reloadData()
+                let entity : NSEntityDescription = NSEntityDescription.entity(forEntityName: "List", in: self.context)!
+                let object : NSManagedObject = NSManagedObject(entity: entity, insertInto: self.context)
+                
+                object.setValue(text , forKey: "title")
+                
+                do {
+                    try self.context.save()
+                } catch {
+                    fatalError ("Data can't save into CoreData")
+                }
+                
+                self.reloadDataOfTableView()
             }
         }
         let actionCancel = UIAlertAction.init(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil)
@@ -109,7 +134,19 @@ class TableViewController: UITableViewController {
         self.present(alert, animated: true) {
             print("Alert")
         }
-        
-        
     }
+    
+    
+    //MARK: - Functions
+    func reloadDataOfTableView () {
+        // Needs FetchRequest
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "List")
+        do {
+            let result = try  context.fetch(request)
+            items = result as! [NSManagedObject]
+            self.tableView.reloadData()
+        } catch {
+            fatalError("Retrieve data is failed!")
+        }
+    } // End of Func
 }
