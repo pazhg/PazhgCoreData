@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 
+
 class TableViewController: UITableViewController {
     
     //var items : [String] = []
-    var items : [NSManagedObject] = []
+   var items : [List] = []
     
     var container : NSPersistentContainer!
     var context : NSManagedObjectContext!
@@ -56,8 +57,12 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         // Configure the cell...
         //cell.textLabel!.text = items [ indexPath.row ]
-        let item = items [ indexPath.row]
-        cell.textLabel!.text =  item.value(forKey: "title") as? String
+//        let item = items [ indexPath.row]
+//        cell.textLabel!.text =  item.value(forKey: "title") as? String
+        
+        let newItem = items [ indexPath.row]
+        cell.textLabel!.text = newItem.itemTitle
+        
         return cell
     }
 
@@ -113,10 +118,14 @@ class TableViewController: UITableViewController {
             if let text = alert.textFields?.first?.text {
                 //self.items.append(text)
                 //self.tableView.reloadData()
-                let entity : NSEntityDescription = NSEntityDescription.entity(forEntityName: "Item", in: self.context)!
-                let object : NSManagedObject = NSManagedObject(entity: entity, insertInto: self.context)
+//                let entity : NSEntityDescription = NSEntityDescription.entity(forEntityName: "Item", in: self.context)!
+//                let object : NSManagedObject = NSManagedObject(entity: entity, insertInto: self.context)
+//
+//                object.setValue(text , forKey: "title")
                 
-                object.setValue(text , forKey: "title")
+                let entity  = NSEntityDescription.entity(forEntityName: "List", in: self.context)
+                let object = NSManagedObject(entity: entity!, insertInto: self.context) as! List
+                object.itemTitle = text
                 
                 do {
                     try self.context.save()
@@ -136,17 +145,20 @@ class TableViewController: UITableViewController {
         }
     }
     
-    
     //MARK: - Functions
     func reloadDataOfTableView () {
         // Needs FetchRequest
-        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Item")
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "List")
         do {
             let result = try  context.fetch(request)
-            items = result as! [NSManagedObject]
+            items = result as! [List]
             self.tableView.reloadData()
         } catch {
             fatalError("Retrieve data is failed!")
         }
+
+        
+        
+        
     } // End of Func
 }
