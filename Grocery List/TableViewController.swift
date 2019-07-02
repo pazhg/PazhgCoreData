@@ -113,7 +113,7 @@ class TableViewController: UITableViewController {
             if let text = alert.textFields?.first?.text {
                 //self.items.append(text)
                 //self.tableView.reloadData()
-                let entity : NSEntityDescription = NSEntityDescription.entity(forEntityName: "List", in: self.context)!
+                let entity : NSEntityDescription = NSEntityDescription.entity(forEntityName: "Item", in: self.context)!
                 let object : NSManagedObject = NSManagedObject(entity: entity, insertInto: self.context)
                 
                 object.setValue(text , forKey: "title")
@@ -140,7 +140,7 @@ class TableViewController: UITableViewController {
     //MARK: - Functions
     func reloadDataOfTableView () {
         // Needs FetchRequest
-        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "List")
+        let request = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Item")
         do {
             let result = try  context.fetch(request)
             items = result as! [NSManagedObject]
